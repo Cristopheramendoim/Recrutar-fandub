@@ -34,7 +34,7 @@ const StoneMonument = ({ side }: { side: 'left' | 'right' }) => {
           rotateZ: { duration: 15, repeat: Infinity, ease: 'easeInOut' }
         }}
         className="w-20 h-72 relative"
-        style={{ transformStyle: 'preserve-3d' }}
+        style={{ transformStyle: 'preserve-3d', willChange: "transform" }}
       >
         {/* Front */}
         <div className={`absolute w-full h-full bg-slate-800 ${borderColor} border-2 overflow-hidden`} style={{ transform: 'translateZ(40px)', boxShadow: glowShadow }}>
@@ -98,6 +98,7 @@ const BackgroundAnimation = () => {
 
       {/* Sombras grandes se mexendo */}
       <motion.div
+        style={{ willChange: "transform" }}
         animate={{
           x: [0, 150, -50, 0],
           y: [0, -100, 100, 0],
@@ -110,6 +111,7 @@ const BackgroundAnimation = () => {
         className="absolute top-1/4 -left-1/4 w-[800px] h-[800px] bg-purple-900/20 rounded-full blur-[150px]"
       />
       <motion.div
+        style={{ willChange: "transform" }}
         animate={{
           x: [0, -150, 50, 0],
           y: [0, 100, -100, 0],
@@ -123,9 +125,10 @@ const BackgroundAnimation = () => {
       />
 
       {/* Círculos brilhantes caindo devagar (efeito fosco no mar) */}
-      {[...Array(20)].map((_, i) => (
+      {[...Array(12)].map((_, i) => (
         <motion.div
           key={i}
+          style={{ willChange: "transform, opacity" }}
           initial={{
             top: "-10%",
             left: `${Math.random() * 100}%`,
@@ -143,7 +146,7 @@ const BackgroundAnimation = () => {
             delay: Math.random() * 15,
             ease: "linear",
           }}
-          className="absolute w-16 h-16 rounded-full bg-gradient-to-tr from-purple-400/10 to-pink-500/10 backdrop-blur-md shadow-[0_0_20px_rgba(255,0,255,0.15)] border border-white/5"
+          className="absolute w-16 h-16 rounded-full bg-gradient-to-tr from-purple-400/10 to-pink-500/10 shadow-[0_0_20px_rgba(255,0,255,0.15)] border border-white/5"
         />
       ))}
 
@@ -157,6 +160,14 @@ const BackgroundAnimation = () => {
         return (
           <motion.div
             key={`ring-${i}`}
+            style={{
+              width: size,
+              height: size,
+              border: `4px solid ${borderColor}`,
+              boxShadow: `0 0 15px ${shadowColor}, inset 0 0 15px ${shadowColor}`,
+              borderRadius: '50%',
+              willChange: "transform"
+            }}
             initial={{
               top: `${Math.random() * 80 + 10}%`,
               left: isLeftToRight ? "-20%" : "120%",
@@ -171,14 +182,7 @@ const BackgroundAnimation = () => {
               delay: Math.random() * 10,
               ease: "linear",
             }}
-            style={{
-              width: size,
-              height: size,
-              border: `4px solid ${borderColor}`,
-              boxShadow: `0 0 15px ${shadowColor}, inset 0 0 15px ${shadowColor}`,
-              borderRadius: '50%',
-            }}
-            className="absolute opacity-40 backdrop-blur-sm pointer-events-none"
+            className="absolute opacity-40 pointer-events-none"
           />
         );
       })}
