@@ -98,7 +98,10 @@ const BackgroundAnimation = () => {
 
       {/* Sombras grandes se mexendo */}
       <motion.div
-        style={{ willChange: "transform" }}
+        style={{
+          background: 'radial-gradient(circle, rgba(88,28,135,0.4) 0%, rgba(88,28,135,0) 70%)',
+          willChange: "transform"
+        }}
         animate={{
           x: [0, 150, -50, 0],
           y: [0, -100, 100, 0],
@@ -108,10 +111,13 @@ const BackgroundAnimation = () => {
           repeat: Infinity,
           ease: "linear"
         }}
-        className="absolute top-1/4 -left-1/4 w-[800px] h-[800px] bg-purple-900/20 rounded-full blur-[150px]"
+        className="absolute top-1/4 -left-1/4 w-[800px] h-[800px] rounded-full"
       />
       <motion.div
-        style={{ willChange: "transform" }}
+        style={{
+          background: 'radial-gradient(circle, rgba(131,24,67,0.4) 0%, rgba(131,24,67,0) 70%)',
+          willChange: "transform"
+        }}
         animate={{
           x: [0, -150, 50, 0],
           y: [0, 100, -100, 0],
@@ -121,22 +127,25 @@ const BackgroundAnimation = () => {
           repeat: Infinity,
           ease: "linear"
         }}
-        className="absolute bottom-1/4 -right-1/4 w-[800px] h-[800px] bg-pink-900/20 rounded-full blur-[150px]"
+        className="absolute bottom-1/4 -right-1/4 w-[800px] h-[800px] rounded-full"
       />
 
       {/* Círculos brilhantes caindo devagar (efeito fosco no mar) */}
       {[...Array(12)].map((_, i) => (
         <motion.div
           key={i}
-          style={{ willChange: "transform, opacity" }}
-          initial={{
-            top: "-10%",
+          style={{ 
+            top: 0,
             left: `${Math.random() * 100}%`,
+            willChange: "transform, opacity" 
+          }}
+          initial={{
+            y: "-10vh",
             opacity: 0,
             scale: Math.random() * 0.6 + 0.2,
           }}
           animate={{
-            top: "110%",
+            y: "110vh",
             rotate: 360,
             opacity: [0, 0.7, 0.7, 0],
           }}
@@ -146,34 +155,35 @@ const BackgroundAnimation = () => {
             delay: Math.random() * 15,
             ease: "linear",
           }}
-          className="absolute w-16 h-16 rounded-full bg-gradient-to-tr from-purple-400/10 to-pink-500/10 shadow-[0_0_20px_rgba(255,0,255,0.15)] border border-white/5"
+          className="absolute w-16 h-16 rounded-full bg-gradient-to-tr from-purple-400/20 to-pink-500/20 shadow-[0_0_10px_rgba(255,0,255,0.1)] border border-white/5"
         />
       ))}
 
       {/* Argolas neon flutuando de um lado para o outro sem girar */}
       {[...Array(6)].map((_, i) => {
         const size = Math.random() * 80 + 40;
-        const shadowColor = i % 2 === 0 ? 'rgba(236,72,153,0.8)' : 'rgba(168,85,247,0.8)';
-        const borderColor = i % 2 === 0 ? '#ec4899' : '#a855f7';
+        const shadowColor = i % 2 === 0 ? 'rgba(236,72,153,0.4)' : 'rgba(168,85,247,0.4)';
+        const borderColor = i % 2 === 0 ? 'rgba(236,72,153,0.5)' : 'rgba(168,85,247,0.5)';
         const isLeftToRight = i % 2 === 0;
 
         return (
           <motion.div
             key={`ring-${i}`}
             style={{
+              top: `${Math.random() * 80 + 10}%`,
+              left: isLeftToRight ? "-20%" : "120%",
               width: size,
               height: size,
-              border: `4px solid ${borderColor}`,
-              boxShadow: `0 0 15px ${shadowColor}, inset 0 0 15px ${shadowColor}`,
+              border: `2px solid ${borderColor}`,
+              boxShadow: `0 0 10px ${shadowColor}`,
               borderRadius: '50%',
               willChange: "transform"
             }}
             initial={{
-              top: `${Math.random() * 80 + 10}%`,
-              left: isLeftToRight ? "-20%" : "120%",
+              x: 0,
             }}
             animate={{
-              left: isLeftToRight ? "120%" : "-20%",
+              x: isLeftToRight ? "140vw" : "-140vw",
               y: [0, Math.random() * 60 - 30, 0],
             }}
             transition={{
@@ -309,9 +319,19 @@ export default function App() {
           <h2 className="text-3xl font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent mb-4">
             Sucesso!
           </h2>
-          <p className="text-slate-300 text-lg leading-relaxed">
-            Ficha enviada com sucesso! Fique atento ao seu Discord, skymira entrará em contato em breve se você for selecionado(a).
+          <p className="text-slate-300 text-lg leading-relaxed mb-6">
+            Sua ficha foi enviada! Mas atenção: <strong className="text-pink-400">você precisa estar no nosso Discord</strong> para que a Skymira consiga te contatar caso seja selecionado(a).
           </p>
+          
+          <a
+            href="https://discord.gg/KxEYfFnpcW"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-col items-center justify-center bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white px-6 py-4 rounded-xl font-bold transition-all shadow-[0_0_20px_rgba(219,39,119,0.3)] hover:shadow-[0_0_30px_rgba(219,39,119,0.5)] w-full hover:scale-[1.02]"
+          >
+            <span className="text-lg mb-1">Entrar no Discord 🚀</span>
+            <span className="text-xs font-normal text-pink-100">(Obrigatório para participar)</span>
+          </a>
         </motion.div>
       </motion.div>
     );
