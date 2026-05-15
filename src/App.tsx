@@ -347,10 +347,10 @@ export default function App() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-3"
+            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-3 px-2 sm:px-0"
           >
-            Recrutamento <br/>
-            <div className="flex items-center justify-center pt-2">
+            <span className="block sm:inline">Recrutamento </span>
+            <div className="flex items-center justify-center pt-2 sm:inline-flex sm:pt-0">
               <motion.span 
                 animate={{ 
                   textShadow: ["0px 0px 10px rgba(219,39,119,0.5)", "0px 0px 20px rgba(147,51,234,0.8)", "0px 0px 10px rgba(219,39,119,0.5)"],
@@ -366,7 +366,7 @@ export default function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-slate-400 max-w-md mx-auto"
+            className="text-slate-400 max-w-md mx-auto text-sm sm:text-base px-2 sm:px-0"
           >
             Faça parte do nosso universo de dublagem, edição e arte. Preencha a ficha com o seu melhor!
           </motion.p>
@@ -427,7 +427,7 @@ export default function App() {
           {/* Group 2: Interests */}
           <div>
             <label className="block text-sm font-semibold text-slate-300 mb-4">Áreas de Interesse</label>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {[
                 { name: 'Fazer Fandub', emoji: '🇧🇷' },
                 { name: 'Editar Vídeos', emoji: '🔥' },
