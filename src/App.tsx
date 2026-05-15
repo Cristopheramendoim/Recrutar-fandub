@@ -246,7 +246,7 @@ export default function App() {
           color: 0xff00ff, // Neon Pink
           fields: [
             { name: "👤 Nome/Apelido", value: formData.name || "Não informado", inline: true },
-            { name: "👾 Discord (Copie e cole)", value: formData.discord ? `\`\`\`\n${formData.discord}\n\`\`\`` : "Não informado", inline: false },
+            { name: "👾 Discord", value: formData.discord || "Não informado", inline: true },
             { name: "🎨 Áreas de Interesse", value: formData.areas.length > 0 ? formData.areas.map(a => `• ${a}`).join('\n') : 'Nenhuma', inline: false },
             { name: "💰 Expectativa", value: formData.finance || 'Não informada', inline: false },
             { name: "📜 Termos", value: formData.terms.length > 0 ? formData.terms.map(t => `✅ ${t}`).join('\n') : '⚠️ Nenhum termo aceito', inline: false },
